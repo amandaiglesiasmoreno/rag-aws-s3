@@ -1,0 +1,14 @@
+{
+  "Rules": [
+    {
+      "ID": "expire-chat-history-after-7-days",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "chat-history/"
+      },
+      "Expiration": {
+        "Days": 7
+      }
+    }
+  ]
+}
