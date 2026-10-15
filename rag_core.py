@@ -45,7 +45,7 @@ def reformulate_query(history: list[dict], current_query: str) -> str:
         return current_query
     messages = [{"role": "system", "content": REFORMULATION_PROMPT}, *history]
     messages.append({"role": "user", "content": f"Latest message: {current_query}"})
-    response = openai_client.chat.completions.create(model=LLM_MODEL, messages=messages, temperature=0)
+    response = openai_client.chat.completions.create(model=LLM_MODEL, messages=messages)
     return response.choices[0].message.content.strip()
 
 
@@ -65,7 +65,6 @@ def stream_answer(history: list[dict], original_query: str, chunks: list[dict]):
     stream = openai_client.chat.completions.create(
         model=LLM_MODEL,
         messages=build_answer_messages(history, original_query, chunks),
-        temperature=0,
         stream=True,
     )
     for event in stream:
